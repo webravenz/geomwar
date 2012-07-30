@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Real time multi-player games with HTML5</title>
+		<style type="text/css">
+			html , body {
+				background: #212121; 
+				color: #fff; 
+				margin: 0; 
+				padding: 0;
+			}
+			#canvas {
+				position: absolute;
+				left: 0; right: 0; top: 0; bottom: 0; 
+				margin: auto;
+			}
+		</style>
+
+		<!-- Notice the URL, this is handled by socket.io on the server automatically, via express -->
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+	  <!-- This will create a connection to socket.io, and print the user serverid that we sent from the server side. --> 
+		<script type="text/javascript">
+
+				//This is all that needs
+			var socket = io.connect('/');
+
+				//Now we can listen for that event
+			socket.on('onconnected', function( data ) {
+
+        //Note that the data is the object we sent from the server, as is. So we can assume its id exists. 
+        console.log( 'Connected successfully to the socket.io server. My server side ID is ' + data.id );
+
+      });
+
+		</script>
+
+	</head>
+
+	<body>
+		<canvas id="canvas"> </canvas>	
+	</body>
+</html>
